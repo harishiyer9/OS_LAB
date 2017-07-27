@@ -1,0 +1,5 @@
+In the linux-4.9.8 diretory I have created a new directory named info. Inside that directory I have created three files named listProcessInfo.c, processInfo.h and Makefile.
+
+listProcessInfo.c : a non-trivial system call (as opposed to a "hello world" system call)
+processInfo.h : It is a header file.
+Makefile : To ensure that the listProcessInfo.c file is compiled and included in the kernel source code.

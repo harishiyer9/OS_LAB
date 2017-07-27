@@ -1,0 +1,29 @@
+a.  In the dependency list and in the rule , make knows it must first compile the .c versions individually, and then build the executable.
+	For example if we have two files hellomake.c and hellomake.h then if we were to make a change to hellomake.h, for example, 
+	make would not recompile the .c files, even though they needed to be. In order to fix this, we need to tell make that all .c files 
+	depend on certain .h files. We can do this by writing a simple rule and adding it to the makefile.
+
+
+b.  $@ is the name of the file being generated.The file name of the target of the rule. If the target is an archive member, then ‘$@’ is the name of the archive file. 
+	$< the first prerequisite (usually the source file).The name of the first prerequisite. If the target got its recipe from an implicit rule, this will be the first prerequisite added by the implicit rule.
+	$^ is the set of dependent files used to build something else. It is the name of the prerequisite that caused the rule to execute.
+	For example, consider the following declaration: all: library.cpp main.cpp
+		$@ is all
+		$< is library.cpp
+		$^ is library.cpp main.cpp
+		
+c.  If we have more than one makefiles in a directory than we can either give all the makefiles unique sensible names like makefile.win and makefile.nix and use them:
+	make -f makefile.win
+	make -f makefile.nix
+	
+	Or we can have a single makefile which contains:
+	
+	win:
+	  make -f makefile.win
+
+	nix:
+	  make -f makefile.nix
+	  
+	and use make win or make nix
+	
+d. For this part I have two .c files named sqrt.c and SQRT.c and one >h file named squareroot.h

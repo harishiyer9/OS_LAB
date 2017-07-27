@@ -1,0 +1,44 @@
+FILE NAME :  toyshell.c
+
+It is a very basic shell in C which executes basic linux commands as well as two built-in commands exit and cd.
+
+Constraints:
+
+1. Commands must be on a single line.
+2. Arguments must be separated by whitespace.
+3. No piping or redirection.
+4. Built in commands : cd and exit.
+
+
+Commands tested:
+cat
+cd
+clear
+date
+df
+kill
+file
+locate
+ls
+man
+mkdir
+ps
+pwd
+rm 
+rmdir
+top
+touch
+who
+
+FILE NAME : pipe.c
+
+It is a extended version of toyshell.c which has the feature of executing multiple piped commands. In addition to executing basic commands, it also supports piped commands.
+Each function's description has been written on the top of the function itself in the code. 
+
+Commands executed:
+All the commands of toyshell.c and the following
+
+ls | grep a
+cat filename | grep something
+cat filename | less
+du -m| sort -n| less

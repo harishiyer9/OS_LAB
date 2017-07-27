@@ -1,0 +1,34 @@
+a. The output of  ls -lrt /usr/bin/passwd is : -rwsr-xr-x 1 root root 54256 Mar 29  2016 /usr/bin/passwd
+   The file passwd is owned by the root.
+
+b. The passwd utility is installed setuid, which means that when it runs, it runs as the user that owns the file, not as the user that called it. In this case, passwd belongs to root, so the setuid bit causes the program to run with root privileges. It is therefore able to make changes to the passwd and shadow files and hence a non root user user can change the password. But the important point here is that he/she can only change his/her password and not the root's password. 
+
+Points regarding root and RUID/EUID:
+
+RUID is the Real User ID . If user2(non root) logs in to the system, the shell is then launched with its real ID set to user2. All    processes he starts from the shell will inherit the real ID user2 as their real ID.
+
+EUID is the Effective User ID, it changes for processes (not for the user) that the user executes that have set the setuid bit.
+
+
+Now in the cse of passwd, following events takes place:
+
+1. When user2 wants to change his password, he executes /usr/bin/passwd.
+
+2. The RUID will be user2 but the EUID of that process will be root.
+
+3. user2 can use passwd to change only his own password because internally passwd checks the RUID and, if it is not root, its actions will be limited to real user's    password.
+
+4. It's neccesary that the EUID becomes root in the case of passwd because the process needs to write to /etc/passwd and/or /etc/shadow otherwise he/shecannot change the password.
+
+How to change password:
+
+mnit@mnit-HP-EliteDesk-800-G1-SFF:~/Desktop/linux-4.9.5$ passwd mnit
+Changing password for mnit.
+(current) UNIX password: 
+Enter new UNIX password: 
+Retype new UNIX password: 
+You must choose a longer password
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+

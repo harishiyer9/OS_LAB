@@ -1,0 +1,11 @@
+Please compile the kernel in the pintos/src/utils directory since even agter modifying my .bashrc file pintos is not available in any other directory other then utils
+
+To run the test please write ./pintos run hello instead of pintos run hello since writing pintos run hello shows an error saying "No command pintos found".
+
+The test files are named awesome.c and awesome.h in the src/tests/threads directory.
+
+I have made changes in the following files.
+
+1. In the file tests.c in pintos/src/tests/threads I have addeed my test in the list of static const struct test tests[] i.e "test",test_hello in the data structur struct test tests[].
+2. In the file tests.h I have added the line extern test_func test_hello.
+3. In the file Make.tests I have added test/threads_SRC += tests/threads/awesome.c 

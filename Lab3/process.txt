@@ -1,0 +1,279 @@
+a) To locate fork.c I used the command find "$(cd ..; pwd)" -name "fork.c"
+
+	mnit@mnit-HP-EliteDesk-800-G1-SFF:~/Desktop/linux-4.9.5$ find "$(cd ..; pwd)" -name "fork.c"
+	/home/mnit/Desktop/linux-4.9.5/kernel/fork.c
+
+To locate sys_fork() I used two commands. Before executing both these commands I have already traversed to directory linux-4.9.5
+
+1.	grep  -Hri sys_fork
+	Output:
+	arch/mn10300/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/mn10300/kernel/entry.S:	.long sys_fork
+	arch/mips/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/mips/kernel/syscall.c:save_static_function(sys_fork);
+	arch/mips/kernel/scall64-64.S:	PTR	__sys_fork
+	arch/mips/kernel/scall32-o32.S:	PTR	__sys_fork
+	arch/mips/kernel/scall64-n32.S:	PTR	__sys_fork
+	arch/mips/kernel/scall64-o32.S:	PTR	__sys_fork
+	arch/cris/arch-v10/kernel/entry.S:	.long sys_fork
+	arch/cris/arch-v32/kernel/entry.S:	.long sys_fork
+	arch/cris/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/sparc/kernel/entry.S:	/* Now that we have a real sys_clone, sys_fork() is
+	arch/sparc/kernel/entry.S:	.globl	sys_fork, flush_patch_two
+	arch/sparc/kernel/entry.S:sys_fork:
+	arch/sparc/kernel/systbls_64.S:/*0*/	.word sys_restart_syscall, sparc_exit, sys_fork, sys_read, sys_write
+	arch/sparc/kernel/systbls_64.S:/*0*/	.word sys_restart_syscall, sparc_exit, sys_fork, sys_read, sys_write
+	arch/sparc/kernel/systbls_32.S:/*0*/	.long sys_restart_syscall, sys_exit, sys_fork, sys_read, sys_write
+	arch/sparc/kernel/syscalls.S:sys_fork:
+	arch/sparc/kernel/process_32.c: *       sys_fork invocation and when we reach here
+	arch/openrisc/include/asm/syscalls.h:asmlinkage long __sys_fork(void);
+	arch/openrisc/include/asm/syscalls.h:#define sys_fork __sys_fork
+	arch/openrisc/include/uapi/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/openrisc/kernel/entry.S:ENTRY(__sys_fork)
+	arch/openrisc/kernel/entry.S:	l.movhi	r29,hi(sys_fork)
+	arch/openrisc/kernel/entry.S:	l.ori	r29,r29,lo(sys_fork)
+	arch/frv/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/frv/kernel/entry.S:	.long sys_fork
+	arch/avr32/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/avr32/kernel/syscall_table.S:	.long sys_fork
+	arch/microblaze/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/microblaze/kernel/syscall_table.S:	.long sys_fork
+	arch/parisc/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/arm/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/arm/kernel/calls.S:		CALL(sys_fork)
+	arch/x86/um/sys_call_table_64.c:#define stub_fork sys_fork
+	arch/x86/include/asm/unistd.h:# define __ARCH_WANT_SYS_FORK
+	arch/x86/entry/syscalls/syscall_64.tbl:57	common	fork			sys_fork/ptregs
+	arch/x86/entry/syscalls/syscall_32.tbl:2	i386	fork			sys_fork			sys_fork
+	arch/powerpc/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/powerpc/kernel/entry_64.S:	bl	sys_fork
+	arch/powerpc/kernel/entry_32.S:	b	sys_fork
+	arch/arc/include/uapi/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/m68k/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/m68k/kernel/entry.S:.globl __sys_fork, __sys_clone, __sys_vfork
+	arch/m68k/kernel/entry.S:ENTRY(__sys_fork)
+	arch/m68k/kernel/entry.S:	jbsr	sys_fork
+	arch/m68k/kernel/syscalltable.S:	.long __sys_fork
+	arch/s390/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/s390/kernel/syscalls.S:SYSCALL(sys_fork,sys_fork)
+	arch/hexagon/include/uapi/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/alpha/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/m32r/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/m32r/kernel/syscall_table.S:	.long sys_fork
+	arch/xtensa/platforms/iss/include/platform/simcall.h:#define SYS_fork	2
+	arch/arm64/include/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/arm64/include/asm/unistd32.h:__SYSCALL(__NR_fork, sys_fork)
+	arch/score/include/uapi/asm/unistd.h:#define __ARCH_WANT_SYS_FORK
+	arch/sh/include/asm/unistd.h:# define __ARCH_WANT_SYS_FORK
+	arch/sh/kernel/syscalls_64.S:	.long sys_fork
+	arch/sh/kernel/syscalls_32.S:	.long sys_fork
+	include/linux/syscalls.h:asmlinkage long sys_fork(void);
+	include/uapi/asm-generic/unistd.h:__SYSCALL(__NR_fork, sys_fork)
+	tools/perf/arch/x86/entry/syscalls/syscall_64.tbl:57	common	fork			sys_fork/ptregs
+	kernel/fork.c:#ifdef __ARCH_WANT_SYS_FORK
+
+	
+2.	grep -ril sys_fork
+	Output
+	arch/mn10300/include/asm/unistd.h
+	arch/mn10300/kernel/entry.S
+	arch/mips/include/asm/unistd.h
+	arch/mips/kernel/syscall.c
+	arch/mips/kernel/scall64-64.S
+	arch/mips/kernel/scall32-o32.S
+	arch/mips/kernel/scall64-n32.S
+	arch/mips/kernel/scall64-o32.S
+	arch/cris/arch-v10/kernel/entry.S
+	arch/cris/arch-v32/kernel/entry.S
+	arch/cris/include/asm/unistd.h
+	arch/sparc/kernel/entry.S
+	arch/sparc/kernel/systbls_64.S
+	arch/sparc/kernel/systbls_32.S
+	arch/sparc/kernel/syscalls.S
+	arch/sparc/kernel/process_32.c
+	arch/openrisc/include/asm/syscalls.h
+	arch/openrisc/include/uapi/asm/unistd.h
+	arch/openrisc/kernel/entry.S
+	arch/frv/include/asm/unistd.h
+	arch/frv/kernel/entry.S
+	arch/avr32/include/asm/unistd.h
+	arch/avr32/kernel/syscall_table.S
+	arch/microblaze/include/asm/unistd.h
+	arch/microblaze/kernel/syscall_table.S
+	arch/parisc/include/asm/unistd.h
+	arch/arm/include/asm/unistd.h
+	arch/arm/kernel/calls.S
+	arch/x86/um/sys_call_table_64.c
+	arch/x86/include/asm/unistd.h
+	arch/x86/entry/syscalls/syscall_64.tbl
+	arch/x86/entry/syscalls/syscall_32.tbl
+	arch/powerpc/include/asm/unistd.h
+	arch/powerpc/kernel/entry_64.S
+	arch/powerpc/kernel/entry_32.S
+	arch/arc/include/uapi/asm/unistd.h
+	arch/m68k/include/asm/unistd.h
+	arch/m68k/kernel/entry.S
+	arch/m68k/kernel/syscalltable.S
+	arch/s390/include/asm/unistd.h
+	arch/s390/kernel/syscalls.S
+	arch/hexagon/include/uapi/asm/unistd.h
+	arch/alpha/include/asm/unistd.h
+	arch/m32r/include/asm/unistd.h
+	arch/m32r/kernel/syscall_table.S
+	arch/xtensa/platforms/iss/include/platform/simcall.h
+	arch/arm64/include/asm/unistd.h
+	arch/arm64/include/asm/unistd32.h
+	arch/score/include/uapi/asm/unistd.h
+	arch/sh/include/asm/unistd.h
+	arch/sh/kernel/syscalls_64.S
+	arch/sh/kernel/syscalls_32.S
+	include/linux/syscalls.h
+	include/uapi/asm-generic/unistd.h
+	tools/perf/arch/x86/entry/syscalls/syscall_64.tbl
+	kernel/fork.c
+
+To locate do_fork() I used the same command as above. Before executing both these commands I have already traversed to directory linux-4.9.5
+
+1.  grep -Hri do_fork
+	Output:
+	arch/blackfin/kernel/process.c:	return do_fork(clone_flags, newsp, 0, NULL, NULL);
+	arch/sparc/include/asm/syscalls.h:asmlinkage long sparc_do_fork(unsigned long clone_flags,
+	arch/sparc/kernel/entry.S:	call	sparc_do_fork
+	arch/sparc/kernel/entry.S:	call	sparc_do_fork
+	arch/sparc/kernel/entry.S:	sethi	%hi(sparc_do_fork), %l1
+	arch/sparc/kernel/entry.S:	jmpl	%l1 + %lo(sparc_do_fork), %g0
+	arch/sparc/kernel/syscalls.S:	ba,pt	%xcc, sparc_do_fork
+	arch/sparc/kernel/process_64.c:asmlinkage long sparc_do_fork(unsigned long clone_flags,
+	arch/sparc/kernel/process_64.c:	ret = do_fork(clone_flags, stack_start, stack_size,
+	arch/sparc/kernel/kernel.h:asmlinkage int sparc_do_fork(unsigned long clone_flags,
+	arch/sparc/kernel/process_32.c:	/* do_fork() grabs the parent semaphore, we must release it
+	arch/sparc/kernel/process_32.c:asmlinkage int sparc_do_fork(unsigned long clone_flags,
+	arch/sparc/kernel/process_32.c:	ret = do_fork(clone_flags, stack_start, stack_size,
+	arch/sparc/kernel/process_32.c: *       do_fork().
+	arch/parisc/kernel/vmlinux.lds.S:		*(.text.do_fork)
+	arch/arc/kernel/entry.S:	;    out whenever kernel_execve (now inline do_fork()) is involved
+	arch/m68k/kernel/process.c: * do_fork() anyway.  So in this case it's actually better to pass pt_regs *
+	arch/m68k/kernel/process.c: * and extract arguments for do_fork() from there.  Eventually we might
+	arch/m68k/kernel/process.c: * go for calling do_fork() directly from the wrapper, but only after we
+	arch/m68k/kernel/process.c: * are finished with do_fork() prototype conversion.
+	arch/m68k/kernel/process.c:	return do_fork(regs->d1, regs->d2, 0,
+	arch/nios2/kernel/entry.S:	call	do_fork
+	arch/h8300/kernel/process.c:	return do_fork(clone_flags, newsp, 0,
+	arch/ia64/kernel/entry.S:	mov loc1=r16				// save ar.pfs across do_fork
+	arch/ia64/kernel/entry.S:	br.call.sptk.many rp=do_fork
+	arch/ia64/kernel/entry.S:	mov loc1=r16				// save ar.pfs across do_fork
+	arch/ia64/kernel/entry.S:	br.call.sptk.many rp=do_fork
+	arch/ia64/kernel/entry.S:	 * Called by ia64_switch_to() after do_fork()->copy_thread().  r8 contains the
+	arch/ia64/kernel/process.c: *	do_fork			do_fork
+	drivers/misc/kgdbts.c: * F## = Break at do_fork for ## iterations
+	drivers/misc/kgdbts.c: * NOTE: that the do_fork and sys_open tests are mutually exclusive.
+	drivers/misc/kgdbts.c: * Or if you wanted to perform the NMI test for 6 seconds and do_fork
+	drivers/misc/kgdbts.c: * ## This tests break points on do_fork
+	drivers/misc/kgdbts.c:	else if (!strcmp(arg, "do_fork"))
+	drivers/misc/kgdbts.c:		addr = (unsigned long)_do_fork;
+	drivers/misc/kgdbts.c:	    ((!strcmp(arg, "sys_open") || !strcmp(arg, "do_fork")))) {
+	drivers/misc/kgdbts.c: * Test for hitting a breakpoint at do_fork for what ever the number
+	drivers/misc/kgdbts.c:static struct test_struct do_fork_test[] = {
+	drivers/misc/kgdbts.c:	{ "do_fork", "OK", sw_break, }, /* set sw breakpoint */
+	drivers/misc/kgdbts.c:	{ "do_fork", "OK", sw_rem_break }, /*remove breakpoint */
+	drivers/misc/kgdbts.c:	{ "g", "do_fork", NULL, check_and_rewind_pc }, /* check location */
+	drivers/misc/kgdbts.c:	{ "g", "do_fork", NULL, check_single_step },
+	drivers/misc/kgdbts.c:	{ "do_fork", "OK", sw_break, }, /* set sw breakpoint */
+	drivers/misc/kgdbts.c:static void run_do_fork_test(void)
+	drivers/misc/kgdbts.c:	ts.tst = do_fork_test;
+	drivers/misc/kgdbts.c:	ts.name = "do_fork_test";
+	drivers/misc/kgdbts.c:	/* If the do_fork test is run it will be the last test that is
+	drivers/misc/kgdbts.c:		printk(KERN_INFO "kgdbts:RUN do_fork for %i breakpoints\n",
+	drivers/misc/kgdbts.c:		run_do_fork_test();
+	include/trace/events/sched.h: * Tracepoint for do_fork:
+	include/linux/sched.h:extern long _do_fork(unsigned long, unsigned long, unsigned long, int __user *, int __user *, unsigned long);
+	include/linux/sched.h:extern long do_fork(unsigned long, unsigned long, unsigned long, int __user *, int __user *);
+	Documentation/trace/ftrace.txt: => do_fork
+	Documentation/trace/events.txt:             _do_fork+0x18e/0x330
+	Documentation/trace/events.txt:             _do_fork+0x18e/0x330
+	Documentation/kprobes.txt:do_exit() case covered. do_execve() and do_fork() are not an issue.
+	Documentation/kprobes.txt:c011a316  j  do_fork+0x0
+	samples/kprobes/kprobe_example.c: * stack trace and selected registers when _do_fork() is called.
+	samples/kprobes/kprobe_example.c: * whenever _do_fork() is invoked to create a new process.
+	samples/kprobes/kprobe_example.c:static char symbol[MAX_SYMBOL_LEN] = "_do_fork";
+	samples/kprobes/kretprobe_example.c: * If no func_name is specified, _do_fork is instrumented
+	samples/kprobes/kretprobe_example.c:static char func_name[NAME_MAX] = "_do_fork";
+	samples/kprobes/jprobe_example.c: * the arguments of _do_fork().
+	samples/kprobes/jprobe_example.c: * console whenever _do_fork() is invoked to create a new process.
+	samples/kprobes/jprobe_example.c: * Jumper probe for _do_fork.
+	samples/kprobes/jprobe_example.c:/* Proxy routine having the same arguments as actual _do_fork() routine */
+	samples/kprobes/jprobe_example.c:static long j_do_fork(unsigned long clone_flags, unsigned long stack_start,
+	samples/kprobes/jprobe_example.c:	.entry			= j_do_fork,
+	samples/kprobes/jprobe_example.c:		.symbol_name	= "_do_fork",
+	tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_args.tc:echo 'r:testprobe2 _do_fork $retval' > kprobe_events
+	tools/testing/selftests/ftrace/test.d/kprobe/busy_check.tc:echo p:myevent _do_fork > kprobe_events
+	tools/testing/selftests/ftrace/test.d/kprobe/add_and_remove.tc:echo p:myevent _do_fork > kprobe_events
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_args.tc:echo 'p:testprobe _do_fork $stack $stack0 +0($stack)' > kprobe_events
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:echo _do_fork > set_ftrace_filter
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:echo 'p:testprobe _do_fork' > kprobe_events
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:! grep '_do_fork <-' trace
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:grep '_do_fork <-' trace
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:grep '_do_fork <-' trace
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:grep '_do_fork <-' trace
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc:! grep '_do_fork <-' trace
+	kernel/kthread.c:/* called from do_fork() to get node information for about to be created task */
+	kernel/fork.c:long _do_fork(unsigned long clone_flags,
+	kernel/fork.c:/* For compatibility with architectures that call do_fork directly rather than
+	kernel/fork.c:long do_fork(unsigned long clone_flags,
+	kernel/fork.c:	return _do_fork(clone_flags, stack_start, stack_size,
+	kernel/fork.c:	return _do_fork(flags|CLONE_VM|CLONE_UNTRACED, (unsigned long)fn,
+	kernel/fork.c:	return _do_fork(SIGCHLD, 0, 0, NULL, NULL, 0);
+	kernel/fork.c:	return _do_fork(CLONE_VFORK | CLONE_VM | SIGCHLD, 0,
+	kernel/fork.c:	return _do_fork(clone_flags, newsp, 0, parent_tidptr, child_tidptr, tls);
+	kernel/fork.c: * functions used by do_fork() cannot be used here directly
+
+2. grep -ril do_fork
+	Output
+	arch/blackfin/kernel/process.c
+	arch/sparc/include/asm/syscalls.h
+	arch/sparc/kernel/entry.S
+	arch/sparc/kernel/syscalls.S
+	arch/sparc/kernel/process_64.c
+	arch/sparc/kernel/kernel.h
+	arch/sparc/kernel/process_32.c
+	arch/parisc/kernel/vmlinux.lds.S
+	arch/arc/kernel/entry.S
+	arch/m68k/kernel/process.c
+	arch/nios2/kernel/entry.S
+	arch/h8300/kernel/process.c
+	arch/ia64/kernel/entry.S
+	arch/ia64/kernel/process.c
+	drivers/misc/kgdbts.c
+	include/trace/events/sched.h
+	include/linux/sched.h
+	Documentation/trace/ftrace.txt
+	Documentation/trace/events.txt
+	Documentation/kprobes.txt
+	samples/kprobes/kprobe_example.c
+	samples/kprobes/kretprobe_example.c
+	samples/kprobes/jprobe_example.c
+	tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_args.tc
+	tools/testing/selftests/ftrace/test.d/kprobe/busy_check.tc
+	tools/testing/selftests/ftrace/test.d/kprobe/add_and_remove.tc
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_args.tc
+	tools/testing/selftests/ftrace/test.d/kprobe/kprobe_ftrace.tc
+	kernel/kthread.c
+	kernel/fork.c
+
+b) The command which I used is :  ctree -I "makefile"
+
+c)To locate task_struct I used the command   grep  -Hri "^struct task_struct {" 
+
+	Output:
+	include/linux/sched.h:struct task_struct {
+    tools/lib/lockdep/uinclude/linux/lockdep.h:struct task_struct {
+	
+	Here the first file is the one which is needed. The path of the file where it is present is linux-4.8.5/include/linux/sched.h
+	The task_struct structure contains all the information that the kernel has and needs about a process.
+	Struct task_struct was stored at the end of the kernel stack of each process. This allowed architectures with few registers, such as x86, to calculate the location of the process 	descriptor via the stack pointer without using an extra register to store the location.
+
+	Each element in the task list is a process descriptor of the type struct task_struct, which is defined in <linux/sched.h>. The process descriptor contains all the information 	about a specific process.
+	The process descriptor contains the data that describes the executing programopen files, the process's address space, pending signals, the process's state
+
+
+d). jiffies.c is located at /linux-4.9.5/kernel/time/jiffies.c 	jiffies.h is located at /linux-4.9.5/include/linux/jiffies.h 	command: locate jiffiesa. 
